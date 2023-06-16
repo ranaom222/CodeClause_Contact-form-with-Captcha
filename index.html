@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Form</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <br><br>
+<center>
+<h1>Contact form with Captcha Code </h1>
+<input type="text" placeholder="First Name"><br><br>
+<input type="text" placeholder=" Last Name"><br><br>
+<input type="email" placeholder="Email"><br><br>
+<input type="password" placeholder="password"><br>
+
+<br>
+<div class="container">
+  <form name="form1">
+    <input type="text" id="captchaTxtArea" name="text" value=""><br/>
+    <input type="text" id="CaptchaEnter" placeholder="Enter The Captcha Code"><br/>
+    <input type="button" value="REFRESH" id="refreshbtn" onclick="genNewCaptcha()">
+    <input type="button" value="CHECK" id="checkbtn" onclick="checkCaptcha()">
+
+  </form>
+</div>
+</center>
+<script type="text/javascript">
+  var captcha, chars;
+
+  function genNewCaptcha(){
+    chars = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    captcha = chars[Math.floor(Math.random() * chars.length )];
+    for(var i=0; i<6; i++){
+      captcha = captcha + chars[Math.floor(Math.random() * chars.length )];
+    }
+    form1.text.value = captcha;
+  }
+
+  function checkCaptcha(){
+    var check = document.getElementById("CaptchaEnter").value;
+    if(captcha == check){
+      alert("Valid Captcha!!! Success");
+      document.getElementById("CaptchaEnter").value = "";
+    }else{
+      alert("InValid Captcha!!! Please Try Again");
+      document.getElementById("CaptchaEnter").value = "";
+    }
+
+    genNewCaptcha();
+  }
+</script>
+</body>
+</html>
